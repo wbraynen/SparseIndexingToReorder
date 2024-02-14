@@ -27,6 +27,12 @@ struct ContentView: View {
         }
     }
 
+    /// Uses sparce indexing.
+    ///
+    /// This avoids having to copy the entire dataset into memory and saving the whole thing back.
+    /// However, this way of doing it means we would need to reindex the database once in a while
+    /// (e.g. on a background thread), so that we don't end up with don't lose the sparcity of our
+    /// indexes.
     func moveItems(from source: IndexSet, to destination: Int) {
         guard let sourceIndex = source.first else { return }
 

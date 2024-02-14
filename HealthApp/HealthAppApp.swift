@@ -36,6 +36,8 @@ struct HealthApp: App {
         for number in 1...100000 {
             let newItem = Item(context: context)
             newItem.name = "\(number)"
+
+            // Uses sparce indexing.  1000, 2000, 3000... instead of 0,1,2,3...
             newItem.orderIndex = Int64(number * 1000)
         }
 
