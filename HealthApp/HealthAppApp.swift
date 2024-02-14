@@ -36,7 +36,7 @@ struct HealthApp: App {
         for number in 1...100000 {
             let newItem = Item(context: context)
             newItem.name = "\(number)"
-            newItem.orderIndex = Int64(number - 1)
+            newItem.orderIndex = Int64(number * 1000)
         }
 
         do {

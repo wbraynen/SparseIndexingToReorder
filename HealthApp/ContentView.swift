@@ -27,15 +27,30 @@ struct ContentView: View {
         }
     }
 
-    private func moveItems(from source: IndexSet, to destination: Int) {
-        // Implementation assumes 'orderIndex' is managed and consistent across items
-        var revisedItems = items.map { $0 }
-        revisedItems.move(fromOffsets: source, toOffset: destination)
+    func moveItems(from source: IndexSet, to destination: Int) {
+        guard let sourceIndex = source.first else { return }
 
-        // Update the orderIndex for all items
-        for index in revisedItems.indices {
-            revisedItems[index].orderIndex = Int64(index)
+        let movingItem = items[sourceIndex]
+        let destinationIndex = destination - 1
+
+        let newIndex: Int64
+
+        if destinationIndex < 0  {
+            // Moved to the top
+            let oldIndex = items.first!.orderIndex
+            newIndex = oldIndex / 2
+        } else if destinationIndex >= items.count - 1 {
+            // Moved to the bottom
+            let oldIndex = items.last!.orderIndex
+            newIndex = oldIndex + 1000
+        } else {
+            // Moved to a middle position
+            let beforeItem = items[max(0, destinationIndex)]
+            let afterItem = items[min(items.count - 1, destinationIndex + 1)]
+            newIndex = (beforeItem.orderIndex + afterItem.orderIndex) / 2
         }
+
+        movingItem.orderIndex = newIndex
 
         do {
             try viewContext.save()
