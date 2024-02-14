@@ -33,7 +33,7 @@ struct HealthApp: App {
     private func seedWithSampleData() {
         let context: NSManagedObjectContext = persistenceController.container.viewContext
 
-        for number in 1...10 {
+        for number in 1...100000 {
             let newItem = Item(context: context)
             newItem.name = "\(number)"
             newItem.orderIndex = Int64(number - 1)
