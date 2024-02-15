@@ -48,6 +48,7 @@
 		BECA1D962B7C0D4E001D51FF /* HealthAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HealthAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BECA1D9A2B7C0D4E001D51FF /* HealthAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthAppUITests.swift; sourceTree = "<group>"; };
 		BECA1D9C2B7C0D4E001D51FF /* HealthAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BEDEFB122B7E800200286BE3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +79,7 @@
 		BECA1D6E2B7C0D4D001D51FF = {
 			isa = PBXGroup;
 			children = (
+				BEDEFB122B7E800200286BE3 /* README.md */,
 				BECA1D792B7C0D4D001D51FF /* HealthApp */,
 				BECA1D8F2B7C0D4E001D51FF /* HealthAppTests */,
 				BECA1D992B7C0D4E001D51FF /* HealthAppUITests */,
