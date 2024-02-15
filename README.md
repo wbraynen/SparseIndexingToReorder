@@ -1,4 +1,4 @@
-#  A demo of parse indexing of CoreData records
+#  A demo of sparse indexing of CoreData records
 
 ## There is no view model and no paging
 
@@ -9,14 +9,16 @@ Also, interestingly, note that SwiftUI's `@FetchRequest` has no trouble displayi
 
 ## The goal of this demo
 
-Reordering CoreData records in a reasonable amount of time no matter how big the dataset persisted to disk.  The solution demoed here is parse indexing.
-
-Not production ready 🫠, but interesting 😃.
+The goal of this demo is reordering CoreData records in a reasonable amount of time no matter how big the dataset persisted to disk.  The solution demoed here is parse indexing.  (The periodic background re-indexing is out of scope.)
 
 
 ## Results
 
-With the problem, the UI will freeze given 100,000 records, let alone a million.  With the solution (e.g. tip of the `main` branch), on my physical phone, it takes about 6 seconds to reorder whether the dataset is 10 records or 10 million records.  6 seconds for 10 records is bad (so a view model would be helpful), but 6 seconds still for 10 million records is great.
+⚠️ Please be patient: it takes a little while to seed the database with 100,000 records the very first time you run this demo.
+
+Big Oh: Constant time instead of linear time.  That is, it takes the same amount of time (and not very long at all) to move one record to another spot no matter the size of the dataset.  This avoids having the UI freeze up given 100,000 records.
+
+Not production ready 🫠, but interesting 😃.
 
 
 ## The code and commit history
