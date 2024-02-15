@@ -1,6 +1,6 @@
 //
 //  Persistence.swift
-//  HealthApp
+//  ReorderDemo
 //
 //  Created by Will on 2/13/24.
 //
@@ -36,7 +36,7 @@ struct PersistenceController {
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "HealthApp")
+        container = NSPersistentContainer(name: "ReorderDemo")
 
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")

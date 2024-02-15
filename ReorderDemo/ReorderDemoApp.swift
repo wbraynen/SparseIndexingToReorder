@@ -1,6 +1,6 @@
 //
-//  HealthAppApp.swift
-//  HealthApp
+//  ReorderDemoApp.swift
+//  ReorderDemo
 //
 //  Created by Will on 2/13/24.
 //
@@ -9,7 +9,7 @@ import CoreData
 import SwiftUI
 
 @main
-struct HealthApp: App {
+struct ReorderDemo: App {
     let persistenceController = PersistenceController.shared
 
     let userDefaults = UserDefaults.standard
@@ -33,6 +33,9 @@ struct HealthApp: App {
     private func seedWithSampleData() {
         let context: NSManagedObjectContext = persistenceController.container.viewContext
 
+        print("Seeding...")
+        print("creating 100,000 records...")
+
         for number in 1...100000 {
             let newItem = Item(context: context)
             newItem.name = "\(number)"
@@ -41,6 +44,8 @@ struct HealthApp: App {
             newItem.orderIndex = Int64(number * 1000)
         }
 
+        print("saving 100,000 records...")
+
         do {
             try context.save()
             userDefaults.setValue(true, forKey: userDefaultsKey)
@@ -48,5 +53,7 @@ struct HealthApp: App {
             // Handle errors, e.g., show an error message or log the error
             print("Failed to seed sample data: \(error)")
         }
+
+        print("Done seeding.")
     }
 }

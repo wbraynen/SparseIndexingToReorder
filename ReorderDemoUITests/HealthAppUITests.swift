@@ -1,13 +1,13 @@
 //
-//  HealthAppUITests.swift
-//  HealthAppUITests
+//  ReorderDemoUITests.swift
+//  ReorderDemoUITests
 //
 //  Created by Will on 2/13/24.
 //
 
 import XCTest
 
-final class HealthAppUITests: XCTestCase {
+final class ReorderDemoUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -16,7 +16,7 @@ Not production ready 🫠, but interesting 😃.
 
 ## Results
 
-With the problem, the UI will freeze given 100,000 records, let alone a million.  With the solution (e.g. tip of the `main` branch), on my physical phone, it takes about 6 seconds to reorder whether the dataset is 10 records or 10 million records. 
+With the problem, the UI will freeze given 100,000 records, let alone a million.  With the solution (e.g. tip of the `main` branch), on my physical phone, it takes about 6 seconds to reorder whether the dataset is 10 records or 10 million records.  6 seconds for 10 records is bad (so a view model would be helpful), but 6 seconds still for 10 million records is great.
 
 
 ## The code and commit history

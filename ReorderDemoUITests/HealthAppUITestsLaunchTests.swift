@@ -1,13 +1,13 @@
 //
-//  HealthAppUITestsLaunchTests.swift
-//  HealthAppUITests
+//  ReorderDemoUITestsLaunchTests.swift
+//  ReorderDemoUITests
 //
 //  Created by Will on 2/13/24.
 //
 
 import XCTest
 
-final class HealthAppUITestsLaunchTests: XCTestCase {
+final class ReorderDemoUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
