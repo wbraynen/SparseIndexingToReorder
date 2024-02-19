@@ -5,65 +5,95 @@
 //  Created by Will on 2/19/24.
 //
 
+import CoreData
 import Foundation
 
 class Seeder: ObservableObject {
+    // MARK: - Properties
+
+    // Progress
     @Published var progress: Double = 0
     @Published var isSeeding: Bool = false
 
-    let persistenceController = PersistenceController.shared
+    // User Defaults
+    private let userDefaults: UserDefaults
+    private let userDefaultsKey: String
 
-    func seedWithSampleData(userDefaults: UserDefaults, userDefaultsKey: String) {
+    // Core Data
+    private let persistentContainer: NSPersistentContainer
+    private let totalRecords = 100_000
+    private let batchSize = 1_000
+
+    // MARK: - Initializer
+
+    init(
+        persistentContainer: NSPersistentContainer = PersistenceController.shared.container,
+        userDefaults: UserDefaults,
+        userDefaultsKey: String)
+    {
+        self.persistentContainer = persistentContainer
+        self.userDefaults = userDefaults
+        self.userDefaultsKey = userDefaultsKey
+    }
+
+    // MARK: - Methods
+
+    func seedWithSampleData() {
         print("Seeding...")
-        print("creating 100,000 records...")
 
-        let backgroundContext = persistenceController.container.newBackgroundContext()
+        isSeeding = true
 
-        // Assume the seeding process is initiated here
         DispatchQueue.global(qos: .background).async {
-            backgroundContext.perform {
-                // Ensure all CoreData operations are performed within this block
+            self.seedDataUsingBackgroundContext()
+        }
+    }
 
-                // Update progress and isSeeding on the main thread
-                // Make sure to adjust the progress calculation as needed
-                for number in 1...100_000 {
+    // MARK: - Helpers
 
-                    DispatchQueue.main.async {
-                        self.progress = Double(number) / 100_000
-                        self.isSeeding = true
-                    }
+    private func seedDataUsingBackgroundContext() {
+        let context = persistentContainer.newBackgroundContext()
 
-                    let newItem = Item(context: backgroundContext)
-                    newItem.name = "\(number)"
+        context.perform {
+            for number in 1...self.totalRecords {
+                self.createRecord(number: number, inContext: context)
 
-                    // Uses sparce indexing.  1000, 2000, 3000... instead of 0,1,2,3...
-                    newItem.orderIndex = Int64(number * 1000)
-
-                    // Periodically save and reset the context to release memory
-                    if number % 1_000 == 0 { // Adjust batch size as appropriate
-                        do {
-                            DispatchQueue.main.async {
-                                self.progress = Double(number) / 100_000
-                            }
-
-                            try backgroundContext.save()
-                            backgroundContext.reset() // Reset the context to free up memory
-                        } catch {
-                            // Handle save error
-                            print("Background context save error: \(error)")
-                        }
-                    }
+                if number % self.batchSize == 0 {
+                    self.updateProgress(number: number)
+                    self.saveContext(context)
                 }
-
-                print("saving 100,000 records...")
-
-                DispatchQueue.main.async {
-                    self.isSeeding = false
-                    userDefaults.setValue(true, forKey: userDefaultsKey)
-                }
-
-                print("Done seeding.")
             }
+
+            self.saveContext(context) // Final save for any remaining records
+            self.finalizeSeeding()
+        }
+    }
+
+    private func createRecord(number: Int, inContext context: NSManagedObjectContext) {
+        let newItem = Item(context: context)
+        newItem.name = "\(number)"
+        newItem.orderIndex = Int64(number * 1000) // Sparse indexing
+    }
+
+    private func updateProgress(number: Int) {
+        DispatchQueue.main.async {
+            self.progress = Double(number) / Double(self.totalRecords)
+        }
+    }
+
+    private func saveContext(_ context: NSManagedObjectContext) {
+        do {
+            try context.save()
+            context.reset() // Free up memory
+        } catch {
+            print("Background context save error: \(error)")
+        }
+    }
+
+    private func finalizeSeeding() {
+        DispatchQueue.main.async {
+            self.isSeeding = false
+            self.userDefaults.setValue(true, forKey: self.userDefaultsKey)
+            print("Done seeding.")
         }
     }
 }
