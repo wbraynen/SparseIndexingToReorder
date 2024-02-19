@@ -11,18 +11,31 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
+    @EnvironmentObject var seeder: Seeder
+
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.orderIndex, ascending: true)],
         animation: .default)
     var items: FetchedResults<Item>
 
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items.indices, id: \.self) { index in
-                    Text(items[index].name ?? "Unknown")
+        VStack {
+            if seeder.isSeeding {
+                let progress = Int(seeder.progress * 100)
+
+                ProgressView(value: seeder.progress) {
+                    Text("Seeding the database: \(progress)%")
                 }
-                .onMove(perform: moveItems)
+                .progressViewStyle(.circular)
+            } else {
+                NavigationView {
+                    List {
+                        ForEach(items.indices, id: \.self) { index in
+                            Text(items[index].name ?? "Unknown")
+                        }
+                        .onMove(perform: moveItems)
+                    }
+                }
             }
         }
     }
@@ -43,11 +56,11 @@ struct ContentView: View {
 
         if destinationIndex < 0  {
             // Moved to the top
-            let oldIndex = items.first!.orderIndex
+            let oldIndex = items.first!.orderIndex // yes, in production we probably don't want to force unwrap
             newIndex = oldIndex / 2
         } else if destinationIndex >= items.count - 1 {
             // Moved to the bottom
-            let oldIndex = items.last!.orderIndex
+            let oldIndex = items.last!.orderIndex // yes, in production we probably don't want to force unwrap
             newIndex = oldIndex + 1000
         } else {
             // Moved to a middle position

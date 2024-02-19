@@ -15,6 +15,7 @@
 		BE1C548B2B7E8E3400F597AE /* HealthAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C54832B7E8B8C00F597AE /* HealthAppUITests.swift */; };
 		BE1C548C2B7E8E3400F597AE /* HealthAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C54822B7E8B8C00F597AE /* HealthAppUITestsLaunchTests.swift */; };
 		BE1C548F2B7E8ED800F597AE /* ReorderDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE1C548D2B7E8EB200F597AE /* ReorderDemo.xcdatamodeld */; };
+		BE67CBED2B84006400EFA590 /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE67CBEC2B84006400EFA590 /* Seeder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		BE225D652B7E88EA00B3BDA1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BE225D682B7E88EA00B3BDA1 /* ReorderDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorderDemoApp.swift; sourceTree = "<group>"; };
 		BE225D692B7E88EA00B3BDA1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BE67CBEC2B84006400EFA590 /* Seeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seeder.swift; sourceTree = "<group>"; };
 		BECA1D772B7C0D4D001D51FF /* ReorderDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReorderDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BECA1D8C2B7C0D4E001D51FF /* ReorderDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReorderDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BECA1D962B7C0D4E001D51FF /* ReorderDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReorderDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +103,7 @@
 				BE225D682B7E88EA00B3BDA1 /* ReorderDemoApp.swift */,
 				BE1C548D2B7E8EB200F597AE /* ReorderDemo.xcdatamodeld */,
 				BE225D692B7E88EA00B3BDA1 /* ContentView.swift */,
+				BE67CBEC2B84006400EFA590 /* Seeder.swift */,
 			);
 			path = ReorderDemo;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE67CBED2B84006400EFA590 /* Seeder.swift in Sources */,
 				BE1C548F2B7E8ED800F597AE /* ReorderDemo.xcdatamodeld in Sources */,
 				BE1C54872B7E8E1800F597AE /* Persistence.swift in Sources */,
 				BE1C54862B7E8E1800F597AE /* ReorderDemoApp.swift in Sources */,
