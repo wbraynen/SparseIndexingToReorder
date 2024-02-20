@@ -23,13 +23,11 @@ struct ContentView: View {
             if seeder.isSeeding {
                 let progress = Int(seeder.progress * 100)
 
-                // On iOS 17, for some reason, contrary to [Apple's documentation](https://developer.apple.com/documentation/swiftui/progressview/),
-                // this does not display a circular progress bar.
-                // Instead, it just displays a spinner.
                 ProgressView(value: seeder.progress) {
                     Text("Seeding the database: \(progress)%")
                 }
-                .progressViewStyle(.circular)
+                .padding(.leading, 50)
+                .padding(.trailing, 50)
             } else {
                 NavigationView {
                     List {
